@@ -1,0 +1,17 @@
+<% book.book_comments.each do |book_comment| %>
+  <div id="comments_error">
+    <%= render 'layouts/errors', obj: book_comment %>
+  </div>
+  <tr>
+    <td>
+      <%= link_to(book_comment.user) do %>
+        <%= image_tag book_comment.user.get_profile_image, size: "100x100" %><br>
+        <%= book_comment.user.name %>
+      <% end %>
+    </td>
+    <td class="p-2"><%= book_comment.comment %></td>
+    <% if book_comment.user == current_user %>
+      <td><%= link_to 'Destroy', book_book_comment_path(book_comment.book, book_comment), method: :delete, remote: true, class: "btn btn-danger btn-sm" %></td>
+    <% end %>
+  </tr>
+<% end %>

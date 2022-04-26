@@ -1,0 +1,26 @@
+<% if users.empty? %>
+  <p>ユーザーはいません</p>
+<% else %>
+    <table class="table">
+      <thead>
+        <tr>
+          <th>image</th>
+          <th>name</th>
+          <th></th>
+          <th></th>
+          <th></th>
+        </tr>
+      </thead>
+      <tbody>
+      <% users.each do |user| %>
+          <tr>
+            <th><%= image_tag user.get_profile_image, size: '50x50' %></th>
+            <th><%= user.name %></th>
+            <td>フォロー数: <%= user.followings.count %></td>
+            <td>フォロワー数: <%= user.followers.count %></td>
+            <td><%= link_to 'Show', user, class: "user_#{user.id}" %></td>
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
+<% end %>
