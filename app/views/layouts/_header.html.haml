@@ -1,0 +1,44 @@
+%body
+  %header
+    %nav.navbar.navbar-expand-lg.navbar-dark.bg-dark
+      .container
+        %a.navbar-brand{:href => "/"}
+          %span Bookers
+        %button.navbar-toggler{"aria-controls" => "navbarNavDropdown", "aria-expanded" => "false", "aria-label" => "Toggle navigation", "data-target" => "#navbarNavDropdown", "data-toggle" => "collapse", :type => "button"}
+          %span.navbar-toggler-icon
+        #navbarNavDropdown.collapse.navbar-collapse
+          %ul.navbar-nav.ml-auto
+            - if user_signed_in?
+              %li
+                = link_to user_path(current_user),class: 'nav-link text-light' do
+                  %i.fas.fa-home
+                  home
+              %li
+                = link_to users_path,class: 'nav-link text-light' do
+                  %i.fas.fa-users
+                  users
+              %li
+                = link_to books_path ,class: 'nav-link text-light' do
+                  %i.fas.fa-book-open
+                  books
+              %li
+                = link_to destroy_user_session_path, method: :delete,class: 'nav-link text-light' do
+                  %i.fas.fa-sign-out-alt
+                  logout
+            - else
+              %li
+                = link_to root_path,class: 'nav-link text-light' do
+                  %i.fas.fa-home
+                  home
+              %li
+                = link_to home_about_path,class: 'nav-link text-light' do
+                  %i.fas.fa-link
+                  about
+              %li
+                = link_to new_user_registration_path,class: 'nav-link text-light' do
+                  %i.fas.fa-user-plus
+                  sign up
+              %li
+                = link_to new_user_session_path ,class: 'nav-link text-light' do
+                  %i.fas.fa-sign-in-alt
+                  login

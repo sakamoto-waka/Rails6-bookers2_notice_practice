@@ -1,0 +1,20 @@
+.container
+  .row
+    .mx-auto.col-11.col-sm-10.col-lg-8.col-xl-6
+      %h1
+        welcome to
+        %i.fas.fa-book
+        %strong Bookers
+        \!!
+      %p
+        In
+        %i.fas.fa-book
+        = succeed "," do
+          %strong Bookers
+      %p you can share and exchange  your opinions , inpressions , and emotions
+      %p about various books!
+      .btn-wrapper.col-10.mx-auto
+        .row
+          = link_to 'Log in',new_user_session_path, class: "btn btn-info btn-sm btn-block mb-3 sign_in"
+        .row
+          = link_to 'Sign Up',new_user_registration_path, class: "btn btn-success btn-sm btn-block sign_up"

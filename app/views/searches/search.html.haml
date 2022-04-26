@@ -1,0 +1,6 @@
+%table.table.table-hover
+  - if @range == 'User'
+    %tbody
+      = render 'users/index', users: @records
+      - else
+        = render 'books/index', books: @records

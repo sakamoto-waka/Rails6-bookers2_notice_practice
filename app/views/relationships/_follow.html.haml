@@ -1,0 +1,21 @@
+- if users.empty?
+  %p ユーザーはいません
+- else
+  %table.table
+    %thead
+      %tr
+        %th image
+        %th name
+        %th
+        %th
+        %th
+    %tbody
+      - users.each do |user|
+        %tr
+          %th= image_tag user.get_profile_image, size: '50x50'
+          %th= user.name
+          %td
+            フォロー数: #{user.followings.count}
+          %td
+            フォロワー数: #{user.followers.count}
+          %td= link_to 'Show', user, class: "user_#{user.id}"

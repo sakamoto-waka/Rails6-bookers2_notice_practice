@@ -1,0 +1,9 @@
+- if user_signed_in?
+  - if book.favorited_by?(current_user)
+    = link_to book_favorites_path(book), method: :delete, remote: true, data: {'turbolinks' => false}, class: 'text-danger' do
+      %i.fas.fa-heart
+      = book.favorites.count
+  - else
+    = link_to book_favorites_path(book), method: :post, remote: true, data: {'turbolinks' => false} do
+      %i.fas.fa-heart
+      = book.favorites.count
