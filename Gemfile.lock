@@ -84,6 +84,8 @@ GEM
       railties (>= 4.1.0)
       responders
       warden (~> 1.2.3)
+    devise-i18n (1.10.2)
+      devise (>= 4.8.0)
     diff-lcs (1.4.4)
     erb2haml (0.1.5)
       html2haml
@@ -256,6 +258,7 @@ DEPENDENCIES
   byebug
   capybara (>= 2.15)
   devise
+  devise-i18n
   erb2haml
   factory_bot_rails
   faker
