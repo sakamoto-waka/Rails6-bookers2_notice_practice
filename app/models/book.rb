@@ -13,7 +13,6 @@ class Book < ApplicationRecord
   end
 
   def self.looks(search, word)
-
     if search == 'perfect_match'
       Book.where(title: word)
     elsif search == 'forward_match'
@@ -24,4 +23,21 @@ class Book < ApplicationRecord
       Book.where('title LIKE ? OR body LIKE ?', "%#{word}%", "%#{word}%")
     end
   end
+  
+  def create_notification_favorite!(current_user)
+    # 既にいいねされてるかチェック
+    temp = Notification.where(["visitor_id = ? and vistited_id = ? and book_id = ? and action = ?", current_user.id, user_id, id, 'favorite'])
+    # いいねされていない時のみ通知レコードを作成
+    if temp.blank?
+      notification = current_user.active_notifications.new(book_id: id,
+                                                           visited_id: user_id,
+                                                           action: 'favorite')
+      # 自分の投稿に対する自分のいいねの場合は通知済みとする
+      if notification.visitor_id == notification.visited_id
+        notification.checked = true
+      end
+      notification.save if notification.valid?
+    end
+  end
+  
 end
