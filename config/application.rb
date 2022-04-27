@@ -20,3 +20,5 @@ module Bookers2
     # config.eager_load_paths << Rails.root.join("extras")
   end
 end
+config.i18n.default_locale = :ja
+config.i18n.load_path += Dir[Rails.root.join('config/locales/*.yml').to_s]
