@@ -9,7 +9,7 @@
         = 'さんが'
 
       - case notification.action
-      - when 'follow' then
+      - when 'following' then
         = 'あなたをフォローしました'
       - when 'favorite' then
         = link_to 'あなたの投稿', notification.book, style: "font-weight: bold;"
