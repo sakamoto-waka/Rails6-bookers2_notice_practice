@@ -32,4 +32,4 @@
       = "#{time_ago_in_words(notification.created_at).upcase}前"
     %hr
   .d-flex.justify-content-center  
-    = paginate notifications_except_me  
+    = paginate notifications_except_me, theme: 'twitter-bootstrap-4'
