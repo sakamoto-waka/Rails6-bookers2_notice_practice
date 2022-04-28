@@ -1,16 +1,7 @@
 .container.px-5.px-sm-0
   .row
     .col-md-3
-      .row
-        %h2 User info
-        = link_to notifications_path do
-          - if unchecked_notifications.any?
-            %span.fa-stack.fa-xs
-              %i.far.fa-bell.fa-stack-2x
-              %i.fas.fa-circle.n-circle.fa-stack-1x
-          - else
-            %span.fa-stack.fa-xs
-              %i.far.fa-bell.fa-stack-2x
+      %h2 User info
             
       = render 'info', user: @user
       %h2.mt-3 New book
