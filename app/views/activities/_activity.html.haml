@@ -1,0 +1,29 @@
+.form_inline
+  %span      
+    - case activity.action
+    - when 'following' then
+      = link_to user_path(visited) do
+        %strong
+          = visited.name
+      = "さんをフォローしました"
+    - when 'favorite' then
+      %span
+        = link_to book_path(activity.book) do
+          %strong
+            = "#{activity.book.user.name}さんの投稿"
+      = "にいいねしました"
+    - when 'book_comment' then
+      - if activity.book.user_id == visitor.id
+        = link_to "あなたの投稿", activity.book, style: "font-weight: bold;"
+      - else
+        %span
+          = link_to book_path(activity.book) do
+            %strong
+              = activity.book.user.name + 'さんの投稿'
+      = "にコメントしました"
+      %p.text-muted.mb-0
+        = truncate(BookComment.find_by(id: activity.book_comment_id)&.comment, length:15)
+
+.small.text-muted.text-right
+  = "#{time_ago_in_words(activity.created_at).upcase}前"
+%hr
