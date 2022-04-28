@@ -1,6 +1,6 @@
--# notifications = @notifications.where.not(visitor_id: current_user.id)
+- notifications = @notifications.where.not(visitor_id: current_user.id)
 - if @notifications.exists?
-  - @notifications.each do |notification|  
+  - notifications.each do |notification|  
     = render 'notifications_except_me', notification: notification
 - else
   %p

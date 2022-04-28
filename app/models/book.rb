@@ -41,7 +41,7 @@ class Book < ApplicationRecord
   end
   
   def create_notification_book_comment!(current_user, book_comment_id)
-    # (全体の処理→)自分以外にコメントしている人を全て取得し、全員に通知を送る
+    # (全体の処理→)自分以外のコメントしている人を全て取得し、全員に通知を送る
     temp_ids = BookComment.select(:user_id).where(book_id: id).where.not(user_id: current_user.id).distinct
     temp_ids.each do |temp_id|
       # ここの下に↓このメソッド作成してる
@@ -56,7 +56,7 @@ class Book < ApplicationRecord
     notification = current_user.active_notifications.new(book_id: id,
                                                          book_comment_id: book_comment_id,
                                                          visited_id: visited_id,
-                                                         action: 'comment')
+                                                         action: 'book_comment')
     # 自分の投稿に対する自分のコメントは通知済みにする
     if notification.visitor_id == notification.visited_id
       notification.checked = true

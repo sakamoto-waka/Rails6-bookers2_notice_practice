@@ -24,7 +24,7 @@
                 = notification.book.user.name + 'さんの投稿'
         = 'にコメントしました'
         %p.text-muted.mb-0
-          = BookComment.find_by(id: notification.comment_id)&.book_comment
+          = BookComment.find_by(id: notification.book_comment_id)&.comment
 
   .small.text-muted.text-right
     = "#{time_ago_in_words(notification.created_at).upcase}前"
