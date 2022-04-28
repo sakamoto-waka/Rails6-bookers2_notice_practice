@@ -1,6 +1,6 @@
 - if @notifications_except_me.exists?
   - @notifications_except_me.each do |notification|  
-    = render 'notifications_except_me', notification: notification
+    = render 'notifications_except_me', notification: notification, visitor: notification.visitor, visited: notification.visited
 - else
   %p
     通知はありません
