@@ -2,13 +2,12 @@
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: https://sass-lang.com/
 
-.fa-bell {
-  
+svg.fa-bell {
+  font-size: 15px;
+  padding-top: 10px;
 }
 
 .n-circle {
-  position: absolute;
-  padding-left: 1rem;
-  padding-top: 0rem;
+  padding: 25px 0 0 20px;
   color: #efa04c;
 }

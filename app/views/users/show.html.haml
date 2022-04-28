@@ -3,14 +3,14 @@
     .col-md-3
       .row
         %h2 User info
-        - if unchecked_notifications.any?
-          %span.fa-stack.fa-xs
-            = link_to notifications_path do
-              %i.far.fa-bell.fa-stack-2x{ style:"font-size: 15px; padding-top: 15px;" }
+        = link_to notifications_path do
+          - if unchecked_notifications.any?
+            %span.fa-stack.fa-xs
+              %i.far.fa-bell.fa-stack-2x
               %i.fas.fa-circle.n-circle.fa-stack-1x
-        - else
-          %span.fa-stack.fa-xs
-            %i.far.fa-bell.fa-stack-2x{ style:"font-size: 15px; padding-top: 15px;" }
+          - else
+            %span.fa-stack.fa-xs
+              %i.far.fa-bell.fa-stack-2x
             
       = render 'info', user: @user
       %h2.mt-3 New book
