@@ -4,6 +4,7 @@ class BookCommentsController < ApplicationController
     @book_comment = current_user.book_comments.new(book_comment_params)
     @book_comment.book_id = @book.id
     if @book_comment.save
+      @book.create_notification_book_comment!(current_user, @book_comment.id)
       flash.now[:notice] = 'successfully comment posted.'
       render :book_comments
     else

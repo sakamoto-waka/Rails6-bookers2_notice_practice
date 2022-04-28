@@ -4,6 +4,7 @@ class FavoritesController < ApplicationController
     favorite = current_user.favorites.new(book_id: @book.id)
     favorite.save
     # redirect_back(fallback_location: books_path)
+    @book.create_notification_favorite!(current_user)
   end
 
   def destroy
