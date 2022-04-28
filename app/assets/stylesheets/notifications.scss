@@ -5,8 +5,14 @@
 svg.fa-bell {
   font-size: 15px;
   padding-top: 10px;
-  color: #000;
 }
+
+svg.fa-bell.no-message {
+  color: #777;
+  :hover {
+    color: #000;
+  }
+}  
 
 .n-circle {
   padding: 25px 0 0 20px;
