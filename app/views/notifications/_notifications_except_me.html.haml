@@ -1,30 +1,35 @@
 .col-md-6.mx-auto
-  .form-inline
-    %span
-      = link_to user_path(visitor) do
-        %strong 
-          = visitor.name
-        = 'さんが'
+  - notifications_except_me.each do |notification|
+    - visitor = notification.visitor
+    - visited = notification.visited
+    .form-inline
+      %span
+        = link_to user_path(visitor) do
+          %strong
+            = visitor.name
+          = 'さんが'
 
-      - case notification.action
-      - when 'following' then
-        = 'あなたをフォローしました'
-      - when 'favorite' then
-        = link_to 'あなたの投稿', notification.book, style: "font-weight: bold;"
-        = 'にいいねしました'
-      - when 'book_comment' then
-        - if notification.book.user_id == visited.id
+        - case notification.action
+        - when 'following' then
+          = 'あなたをフォローしました'
+        - when 'favorite' then
           = link_to 'あなたの投稿', notification.book, style: "font-weight: bold;"
-        - else
-          %span
-            = link_to book_path(notification.book) do
-              %strong 
-                = notification.book.user.name + 'さんの投稿'
-        = 'にコメントしました'
-        %p.text-muted.mb-0
-          = truncate(BookComment.find_by(id: notification.book_comment_id)&.comment, length:15)
+          = 'にいいねしました'
+        - when 'book_comment' then
+          - if notification.book.user_id == visited.id
+            = link_to 'あなたの投稿', notification.book, style: "font-weight: bold;"
+          - else
+            %span
+              = link_to book_path(notification.book) do
+                %strong
+                  = notification.book.user.name + 'さんの投稿'
+          = 'にコメントしました'
+          %p.text-muted.mb-0
+            = truncate(BookComment.find_by(id: notification.book_comment_id)&.comment, length:15)
 
-  .small.text-muted.text-right
-    %i.fas.fa-history
-    = "#{time_ago_in_words(notification.created_at).upcase}前"
-  %hr  
+    .small.text-muted.text-right
+      %i.fas.fa-history
+      = "#{time_ago_in_words(notification.created_at).upcase}前"
+    %hr
+  .d-flex.justify-content-center  
+    = paginate notifications_except_me  
