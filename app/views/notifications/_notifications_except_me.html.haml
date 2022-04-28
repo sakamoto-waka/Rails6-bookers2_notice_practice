@@ -1,31 +1,31 @@
-- visitor = notification.visitor
-- visited = notification.visited
-.col-md-6.mx-auto
-  .form-inline
-    %span
-      = link_to user_path(visitor) do
-        %strong
-          = visitor.name
-      = 'さんが'
+- @notifications_except_me.each do |notification|
+  - visitor = notification.visitor
+  - visited = notification.visited
+  .col-md-6.mx-auto
+    .form-inline
+      %span
+        = link_to user_path(visitor) do
+          %strong = visitor.name
+          = 'さんが'
   
-      - case notification.action
-      - when 'follow' then
-        = 'あなたをフォローしました'
-      - when 'favorite' then
-        = link_to 'あなたの投稿', notification.book, style: "font-weight: bold;"
-        = 'にいいねしました'
-      - when 'book_comment' then
-        - if notification.book.user_id == visited.id
+        - case notification.action
+        - when 'follow' then
+          = 'あなたをフォローしました'
+        - when 'favorite' then
           = link_to 'あなたの投稿', notification.book, style: "font-weight: bold;"
-        - else
-          %span
-            = link_to book_path(notification.book) do
-            %strong
-              =notification.book.user.name + 'さんの投稿'
-        = 'にコメントしました'
-        %p.text-muted.mb-0
-          = BookComment.find_by(id: notification.comment_id)&.book_comment
-          
-  .small.text-muted.text-right
-    = time_ago_in_words(notification.created_at).upcase
-  %hr
+          = 'にいいねしました'
+        - when 'book_comment' then
+          - if notification.book.user_id == visited.id
+            = link_to 'あなたの投稿', notification.book, style: "font-weight: bold;"
+          - else
+            %span
+              = link_to book_path(notification.book) do
+                %strong 
+                  = notification.book.user.name + 'さんの投稿'
+          = 'にコメントしました'
+          %p.text-muted.mb-0
+            = BookComment.find_by(id: notification.comment_id)&.book_comment
+  
+    .small.text-muted.text-right
+      = time_ago_in_words(notification.created_at).upcase
+    %hr  
