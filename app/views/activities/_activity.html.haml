@@ -8,7 +8,7 @@
       = "さんをフォローしました"
     - when 'favorite' then
       %span
-        = link_to post_path(activity.post) do
+        = link_to book_path(activity.book) do
           %strong
             = "#{activity.book.user.name}さんの投稿"
       = "にいいねしました"
@@ -21,9 +21,9 @@
             %strong
               = activity.book.user.name + 'さんの投稿'
       = "にコメントしました"
-      p.text-muted.mb-0
-        = BookComment.find_by(id: activity.book_comment_id)&.comment
+      %p.text-muted.mb-0
+        = truncate(BookComment.find_by(id: activity.book_comment_id)&.comment, length:15)
 
 .small.text-muted.text-right
-  = "#{time_ago_in_words(notification.created_at).upcase}前"
+  = "#{time_ago_in_words(activity.created_at).upcase}前"
 %hr
